@@ -1,18 +1,14 @@
 const http = require("http");
 const express = require("express");
-const socketio = require("socket.io");
 const cors = require("cors");
-//const db1 = require("./db");
-const bodyParser = require("body-parser");
-const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 const router = require("./router");
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
 const mysql = require("mysql2");
 app.use(router);
 app.use(cors());
 app.use(express.json());
+const port=3022;
 const db1 = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -56,6 +52,6 @@ app.post("/logins", (req, res) => {
 });
 
 
-server.listen(process.env.PORT || 3022, () =>
+server.listen(process.env.PORT || port, () =>
   console.log(`Server has started.`)
 );
